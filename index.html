@@ -1,0 +1,1362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quote Board</title>
+<link rel="manifest" href="manifest.json">
+<link rel="icon" type="image/png" href="data:image/png;base64,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">
+<meta name="theme-color" content="#EDE3D0">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Quote Board">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,400;1,9..144,500&family=Playfair+Display:ital,wght@0,500;0,700;1,500;1,700&family=Caveat:wght@500;600;700&family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --panel-bg: rgba(16,15,20,0.62);
+    --panel-border: rgba(255,255,255,0.14);
+    --text-warm: #F3F0EA;
+    --text-muted: #A9A5A0;
+    --accent: #CBA35C;
+    --accent-dim: rgba(203,163,92,0.25);
+    --danger: #C97B63;
+  }
+  *{ box-sizing: border-box; }
+  html,body{
+    margin:0; padding:0; width:100%; height:100%;
+    overflow:hidden;
+    font-family: 'Inter', sans-serif;
+  }
+
+  /* ---------- Board ---------- */
+  #board{
+    position: fixed; inset:0;
+    background-color:#161821;
+    transition: background-color 0.6s ease;
+    overflow:hidden;
+  }
+
+  #quotes-layer{
+    position:absolute; inset:0;
+    pointer-events:none;
+  }
+
+  .quote{
+    position:absolute;
+    max-width: clamp(220px, 46vw, 440px);
+    text-align:center;
+    transform: translate(-50%,-50%) scale(0.94);
+    opacity:0;
+    filter: blur(14px);
+    transition: opacity 1.6s ease, filter 1.6s ease, transform 1.6s ease;
+    font-family: var(--quote-font-family, 'Fraunces', serif);
+    font-style: var(--quote-font-style, italic);
+    font-weight: var(--quote-font-weight, 400);
+    line-height: 1.35;
+    letter-spacing: var(--quote-letter-spacing, 0.01em);
+    text-shadow: 0 2px 24px rgba(0,0,0,0.25);
+    will-change: opacity, filter, transform;
+  }
+  .quote .q-body{ display:block; }
+  .quote .q-author{
+    display:block;
+    text-align: right;
+    margin-top: 0.5em;
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 0.42em;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    opacity: 0.68;
+  }
+  .quote.visible{
+    opacity: 0.94;
+    filter: blur(0px);
+    transform: translate(-50%,-50%) scale(1);
+    animation: breathe 6s ease-in-out infinite;
+  }
+  .quote.fading{
+    opacity:0;
+    filter: blur(14px);
+    transform: translate(-50%,-50%) scale(1.05);
+    animation: none;
+  }
+  @keyframes breathe{
+    0%,100%{ transform: translate(-50%,-50%) scale(1); }
+    50%{ transform: translate(-50%,-50%) scale(1.015); }
+  }
+
+  #empty-state{
+    position:absolute; inset:0;
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    text-align:center;
+    padding: 0 2rem;
+    font-family:'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 0.95rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    opacity: 0.55;
+    pointer-events:none;
+    transition: opacity 0.4s ease;
+  }
+  #empty-state span{ max-width: 340px; display:block; line-height:1.7; }
+  #empty-logo{
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 3rem;
+    line-height: 1;
+    margin-bottom: 14px;
+    color: var(--text-muted);
+    opacity: 0.6;
+  }
+
+  /* ---------- Corner toggle ---------- */
+  #menu-toggle{
+    position: fixed; top: 18px; right: 18px;
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    border: 1px solid var(--panel-border);
+    background: var(--panel-bg);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    display:flex; align-items:center; justify-content:center;
+    cursor:pointer;
+    z-index: 20;
+    transition: border-color 0.25s ease, transform 0.25s ease;
+  }
+  #menu-toggle:hover{ border-color: var(--accent); transform: scale(1.05); }
+  #menu-toggle svg{ width:18px; height:18px; stroke: var(--text-warm); transition: transform 0.35s ease; }
+  #menu-toggle.open svg{ transform: rotate(45deg); }
+
+  #donate-corner{
+    position: fixed; top: 18px; right: 66px;
+    width: 34px; height: 34px;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.09);
+    background: rgba(16,15,20,0.4);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    display:flex; align-items:center; justify-content:center;
+    cursor:pointer;
+    z-index: 12;
+    opacity: 0.55;
+    text-decoration:none;
+    transition: opacity 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
+  }
+  #donate-corner:hover{ opacity: 1; border-color: var(--accent); transform: scale(1.05); }
+  #donate-corner svg{ width:15px; height:15px; fill: var(--text-warm); }
+  body.screensaver-active #donate-corner{ opacity:0; pointer-events:none; }
+
+  /* ---------- Panel ---------- */
+  #panel{
+    position: fixed; top: 18px; right: 18px;
+    width: 300px;
+    max-height: calc(100vh - 36px);
+    overflow-y: auto;
+    background: var(--panel-bg);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border: 1px solid var(--panel-border);
+    border-radius: 16px;
+    padding: 18px;
+    color: var(--text-warm);
+    z-index: 15;
+    transform-origin: top right;
+    transform: scale(0.92);
+    opacity:0;
+    pointer-events:none;
+    transition: opacity 0.22s ease, transform 0.22s ease;
+  }
+  #panel.open{
+    opacity:1;
+    transform: scale(1);
+    pointer-events:auto;
+  }
+  #panel::-webkit-scrollbar{ width:6px; }
+  #panel::-webkit-scrollbar-thumb{ background: rgba(255,255,255,0.15); border-radius:3px; }
+
+  .panel-title{
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--text-muted);
+    margin: 0 0 8px 0;
+    font-weight: 600;
+  }
+  .section{ margin-bottom: 20px; padding-top: 44px; margin-top: -44px; } /* spacer trick unused */
+  .section{ margin: 0 0 20px 0; padding:0; }
+
+  .row{ display:flex; align-items:center; gap:10px; }
+
+  input[type="color"]{
+    -webkit-appearance:none; appearance:none;
+    width: 34px; height: 34px;
+    border-radius: 10px;
+    border: 1px solid var(--panel-border);
+    padding: 0; background:none; cursor:pointer;
+  }
+  input[type="color"]::-webkit-color-swatch-wrapper{ padding:0; border-radius:10px; }
+  input[type="color"]::-webkit-color-swatch{ border:none; border-radius:10px; }
+
+  .swatches{ display:flex; gap:8px; flex-wrap:wrap; margin-top:10px; }
+  .swatch{
+    width:22px; height:22px; border-radius:50%;
+    border: 1px solid rgba(255,255,255,0.25);
+    cursor:pointer;
+    transition: transform 0.15s ease;
+  }
+  .swatch:hover{ transform: scale(1.15); }
+
+  textarea{
+    width:100%;
+    resize:none;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid var(--panel-border);
+    border-radius: 10px;
+    color: var(--text-warm);
+    font-family: 'Inter', sans-serif;
+    font-size: 0.85rem;
+    padding: 9px 10px;
+    line-height:1.4;
+    outline:none;
+    transition: border-color 0.2s ease;
+  }
+  textarea:focus{ border-color: var(--accent); }
+  textarea::placeholder{ color: var(--text-muted); }
+
+  #author-input{
+    width:100%;
+    margin-top:8px;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid var(--panel-border);
+    border-radius: 10px;
+    color: var(--text-warm);
+    font-family: 'Inter', sans-serif;
+    font-size: 0.8rem;
+    padding: 8px 10px;
+    outline:none;
+    transition: border-color 0.2s ease;
+  }
+  #author-input:focus{ border-color: var(--accent); }
+  #author-input::placeholder{ color: var(--text-muted); }
+
+  button{
+    font-family:'Inter', sans-serif;
+    cursor:pointer;
+    border:none;
+    outline:none;
+  }
+  .btn-add{
+    margin-top:8px;
+    width:100%;
+    padding: 9px 0;
+    border-radius: 10px;
+    background: var(--accent);
+    color: #1b1710;
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    transition: filter 0.15s ease, transform 0.1s ease;
+  }
+  .btn-add:hover{ filter: brightness(1.08); }
+  .btn-add:active{ transform: scale(0.98); }
+  .hint{ font-size: 0.68rem; color: var(--text-muted); margin-top:6px; }
+
+  /* ---------- Screensaver mode ---------- */
+  #screensaver-btn{
+    width:100%;
+    padding: 10px 0;
+    border-radius: 10px;
+    background: rgba(255,255,255,0.07);
+    border: 1px solid var(--panel-border);
+    color: var(--text-warm);
+    font-size: 0.8rem;
+    font-weight: 500;
+    display:flex; align-items:center; justify-content:center; gap:7px;
+    transition: border-color 0.2s ease, background 0.2s ease;
+  }
+  #screensaver-btn:hover{ border-color: var(--accent); background: rgba(255,255,255,0.1); }
+  #screensaver-btn svg{ width:15px; height:15px; stroke: var(--accent); }
+
+  /* ---------- Music ---------- */
+  .music-controls{ display:flex; align-items:center; gap:10px; }
+  #music-play{
+    width:36px; height:36px; flex-shrink:0;
+    border-radius: 50%;
+    background: var(--accent);
+    color:#1b1710;
+    display:flex; align-items:center; justify-content:center;
+    font-size:0.85rem;
+  }
+  #music-play:hover{ filter:brightness(1.08); }
+  #music-volume{ flex:1; margin-top:0; }
+  #music-now-playing{
+    font-size: 0.7rem; color: var(--text-muted);
+    margin-top: 8px; min-height: 1em;
+    overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+  }
+  .track-list li{ align-items:center; }
+  .track-list .t-name{ flex:1; opacity:0.9; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  .track-list .t-links{ display:flex; gap:5px; flex-shrink:0; }
+  .track-list .t-link{
+    background: rgba(255,255,255,0.08);
+    color: var(--accent);
+    border-radius: 6px;
+    font-size: 0.64rem;
+    padding: 4px 7px;
+    text-decoration:none;
+    white-space:nowrap;
+    transition: background 0.15s ease;
+  }
+  .track-list .t-link:hover{ background: var(--accent-dim); }
+  .track-list li.playing{ background: var(--accent-dim); }
+
+  #exit-screensaver-hint{
+    position: fixed; bottom: 22px; left: 50%; transform: translateX(-50%);
+    font-family:'Inter', sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.05em;
+    color: var(--text-muted);
+    background: rgba(0,0,0,0.25);
+    padding: 6px 14px;
+    border-radius: 20px;
+    opacity: 0;
+    pointer-events:none;
+    transition: opacity 0.4s ease;
+    z-index: 25;
+  }
+  #exit-screensaver-hint.show{ opacity: 0.85; }
+
+  body.screensaver-active #menu-toggle,
+  body.screensaver-active #panel{
+    opacity: 0;
+    pointer-events: none;
+  }
+  #menu-toggle, #panel{ transition: opacity 0.5s ease, transform 0.22s ease; }
+
+  /* ---------- Packs ---------- */
+  .pack-row{ display:flex; flex-wrap:wrap; gap:6px; }
+  .pack-btn{
+    padding: 6px 11px;
+    border-radius: 20px;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid var(--panel-border);
+    color: var(--text-warm);
+    font-size: 0.72rem;
+    transition: border-color 0.2s ease, background 0.2s ease;
+  }
+  .pack-btn:hover{ border-color: var(--accent); background: var(--accent-dim); }
+
+  /* ---------- Import / export ---------- */
+  .io-row{ display:flex; gap:8px; }
+  .io-btn{
+    flex:1;
+    padding: 8px 0;
+    border-radius: 9px;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid var(--panel-border);
+    color: var(--text-muted);
+    font-size: 0.72rem;
+    transition: border-color 0.2s ease, color 0.2s ease;
+  }
+  .io-btn:hover{ border-color: var(--accent); color: var(--text-warm); }
+
+  .font-grid{
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    gap:8px;
+  }
+  .font-option{
+    background: rgba(255,255,255,0.06);
+    border: 1px solid var(--panel-border);
+    border-radius: 10px;
+    padding: 10px 6px;
+    text-align:center;
+    color: var(--text-warm);
+    font-size: 1.05rem;
+    line-height:1.1;
+    transition: border-color 0.2s ease, background 0.2s ease;
+  }
+  .font-option:hover{ border-color: rgba(255,255,255,0.3); }
+  .font-option.active{
+    border-color: var(--accent);
+    background: var(--accent-dim);
+  }
+  .font-option .fo-label{
+    display:block;
+    font-family:'Inter', sans-serif;
+    font-size: 0.62rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-muted);
+    margin-top: 5px;
+  }
+
+  .quote-list{
+    list-style:none; margin: 10px 0 0 0; padding:0;
+    max-height: 160px; overflow-y:auto;
+    display:flex; flex-direction:column; gap:6px;
+  }
+  .quote-list::-webkit-scrollbar{ width:5px; }
+  .quote-list::-webkit-scrollbar-thumb{ background: rgba(255,255,255,0.15); border-radius:3px; }
+  .quote-list li{
+    display:flex; align-items:flex-start; justify-content:space-between; gap:8px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 8px;
+    padding: 7px 9px;
+    font-size: 0.78rem;
+    line-height:1.35;
+  }
+  .quote-list li .q-text{ flex:1; opacity:0.9; }
+  .quote-list li .q-del{
+    background:none; color: var(--text-muted); font-size:0.95rem;
+    line-height:1; padding:0 2px; flex-shrink:0;
+  }
+  .quote-list li .q-del:hover{ color: var(--danger); }
+  .empty-list{ font-size: 0.75rem; color: var(--text-muted); padding: 4px 2px; }
+
+  .seg{
+    display:flex; background: rgba(255,255,255,0.06);
+    border-radius: 10px; padding:3px; gap:3px;
+  }
+  .seg button{
+    flex:1; padding: 7px 0; border-radius:7px;
+    background:none; color: var(--text-muted);
+    font-size: 0.76rem; font-weight:500;
+    transition: background 0.2s ease, color 0.2s ease;
+  }
+  .seg button.active{ background: var(--accent-dim); color: var(--accent); }
+
+  .slider-row{ display:flex; align-items:center; justify-content:space-between; }
+  .slider-value{ font-size: 0.76rem; color: var(--accent); font-variant-numeric: tabular-nums; }
+  input[type="range"]{
+    width:100%;
+    -webkit-appearance:none; appearance:none;
+    height:3px; border-radius:2px;
+    background: rgba(255,255,255,0.18);
+    margin-top:8px;
+  }
+  input[type="range"]::-webkit-slider-thumb{
+    -webkit-appearance:none; appearance:none;
+    width:14px; height:14px; border-radius:50%;
+    background: var(--accent);
+    cursor:pointer;
+    border: 2px solid rgba(0,0,0,0.2);
+  }
+  input[type="range"]::-moz-range-thumb{
+    width:14px; height:14px; border-radius:50%;
+    background: var(--accent); border:none; cursor:pointer;
+  }
+
+  .stepper{ display:flex; align-items:center; gap:12px; }
+  .stepper button{
+    width:26px; height:26px; border-radius:7px;
+    background: rgba(255,255,255,0.08);
+    color: var(--text-warm); font-size:0.9rem;
+  }
+  .stepper button:hover{ background: rgba(255,255,255,0.15); }
+  .stepper .count{ font-size:0.85rem; min-width:14px; text-align:center; }
+
+  @media (prefers-reduced-motion: reduce){
+    .quote{ transition: opacity 0.4s linear !important; }
+    .quote.visible{ animation:none !important; }
+  }
+
+  @media (max-width: 480px){
+    #panel{ width: calc(100vw - 32px); right: 16px; }
+  }
+</style>
+</head>
+<body>
+
+<div id="board">
+  <div id="empty-state"><span id="empty-logo">&ldquo;</span><span>Add quotes from the menu on the right — they'll start appearing here</span></div>
+  <div id="quotes-layer"></div>
+</div>
+
+<a id="donate-corner" href="https://ko-fi.com/yourname" target="_blank" rel="noopener" aria-label="Support this project">
+  <svg viewBox="0 0 24 24"><path d="M12 21s-8-4.6-8-11a5 5 0 0 1 8-4 5 5 0 0 1 8 4c0 6.4-8 11-8 11z"/></svg>
+</a>
+<button id="menu-toggle" aria-label="Menu">
+  <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+</button>
+
+<div id="panel">
+  <div class="section">
+    <button id="screensaver-btn">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3"/><path d="M21 8V5a2 2 0 0 0-2-2h-3"/><path d="M3 16v3a2 2 0 0 0 2 2h3"/><path d="M16 21h3a2 2 0 0 0 2-2v-3"/></svg>
+      Screensaver mode
+    </button>
+  </div>
+
+  <div class="section">
+    <p class="panel-title">Board color</p>
+    <div class="row">
+      <input type="color" id="bg-color" value="#EDE3D0">
+      <div class="swatches" id="swatches"></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <p class="panel-title">New quote</p>
+    <textarea id="quote-input" rows="3" placeholder="Type a quote or motivation…"></textarea>
+    <input type="text" id="author-input" placeholder="Author (optional)">
+    <button class="btn-add" id="add-btn">Add</button>
+    <p class="hint">Ctrl + Enter to add quickly</p>
+  </div>
+
+  <div class="section">
+    <p class="panel-title">Quick packs</p>
+    <div class="pack-row" id="pack-row"></div>
+  </div>
+
+  <div class="section">
+    <p class="panel-title">Quote font</p>
+    <div class="font-grid" id="font-grid"></div>
+  </div>
+
+  <div class="section">
+    <p class="panel-title">List (<span id="count">0</span>)</p>
+    <ul class="quote-list" id="quote-list"></ul>
+    <div class="io-row">
+      <button class="io-btn" id="export-btn">Export JSON</button>
+      <button class="io-btn" id="import-btn">Import JSON</button>
+      <input type="file" id="import-file" accept="application/json" style="display:none">
+    </div>
+  </div>
+
+  <div class="section">
+    <p class="panel-title">Display order</p>
+    <div class="seg">
+      <button data-order="random" class="active">Random</button>
+      <button data-order="sequential">Sequential</button>
+    </div>
+  </div>
+
+  <div class="section">
+    <p class="panel-title">Pause between appearances</p>
+    <div class="slider-row">
+      <span class="slider-value" id="interval-value">4s</span>
+    </div>
+    <input type="range" id="interval-slider" min="1" max="12" step="0.5" value="4">
+  </div>
+
+  <div class="section">
+    <p class="panel-title">On screen at once</p>
+    <div class="stepper">
+      <button id="dec-max">–</button>
+      <span class="count" id="max-count">2</span>
+      <button id="inc-max">+</button>
+    </div>
+  </div>
+
+  <div class="section">
+    <p class="panel-title">Music</p>
+    <div class="music-controls">
+      <button id="music-play" aria-label="Play / pause">▶</button>
+      <input type="range" id="music-volume" min="0" max="1" step="0.01" value="0.6">
+    </div>
+    <p id="music-now-playing">Nothing playing</p>
+
+    <div class="io-row" style="margin-top:10px;">
+      <button class="io-btn" id="music-upload-btn">+ Add your own tracks</button>
+      <input type="file" id="music-upload-file" accept="audio/*" multiple style="display:none">
+    </div>
+
+    <p class="panel-title" style="margin-top:14px;">Suggested tracks</p>
+    <p class="hint" style="margin:0 0 8px 0;">Paste a YouTube link once — saved for good, then just click the name.</p>
+    <ul class="quote-list track-list" id="preset-track-list"></ul>
+
+    <p class="panel-title" style="margin-top:14px;">Playlist (<span id="track-count">0</span>)</p>
+    <ul class="quote-list track-list" id="track-list"></ul>
+  </div>
+</div>
+
+<div id="exit-screensaver-hint">Move mouse or tap to exit screensaver mode</div>
+<audio id="audio-player" preload="none"></audio>
+<div style="position:absolute; width:0; height:0; opacity:0; pointer-events:none; overflow:hidden;"><div id="yt-player"></div></div>
+
+<script>
+(function(){
+  // ---------- State ----------
+  let quotes = [];
+  let order = 'random';
+  let intervalSec = 4;
+  let maxOnScreen = 2;
+  let seqIndex = 0;
+  let lastRandomIndex = -1;
+  let onScreenCount = 0;
+  let spawnTimer = null;
+
+  const board = document.getElementById('board');
+  const layer = document.getElementById('quotes-layer');
+  const emptyState = document.getElementById('empty-state');
+  const menuToggle = document.getElementById('menu-toggle');
+  const panel = document.getElementById('panel');
+  const bgColor = document.getElementById('bg-color');
+  const swatchesEl = document.getElementById('swatches');
+  const quoteInput = document.getElementById('quote-input');
+  const authorInput = document.getElementById('author-input');
+  const addBtn = document.getElementById('add-btn');
+  const quoteListEl = document.getElementById('quote-list');
+  const countEl = document.getElementById('count');
+  const intervalSlider = document.getElementById('interval-slider');
+  const intervalValue = document.getElementById('interval-value');
+  const decMax = document.getElementById('dec-max');
+  const incMax = document.getElementById('inc-max');
+  const maxCountEl = document.getElementById('max-count');
+  const packRow = document.getElementById('pack-row');
+  const exportBtn = document.getElementById('export-btn');
+  const importBtn = document.getElementById('import-btn');
+  const importFile = document.getElementById('import-file');
+  const screensaverBtn = document.getElementById('screensaver-btn');
+  const exitHint = document.getElementById('exit-screensaver-hint');
+  const audioPlayer = document.getElementById('audio-player');
+  const musicPlayBtn = document.getElementById('music-play');
+  const musicVolume = document.getElementById('music-volume');
+  const nowPlayingEl = document.getElementById('music-now-playing');
+  const musicUploadBtn = document.getElementById('music-upload-btn');
+  const musicUploadFile = document.getElementById('music-upload-file');
+  const presetTrackListEl = document.getElementById('preset-track-list');
+  const trackListEl = document.getElementById('track-list');
+  const trackCountEl = document.getElementById('track-count');
+
+  // ---------- Menu toggle ----------
+  menuToggle.addEventListener('click', () => {
+    panel.classList.toggle('open');
+    menuToggle.classList.toggle('open');
+  });
+
+  // ---------- Background color ----------
+  const presetColors = ['#EDE3D0', '#161821', '#F4F1EA', '#0E1F1C', '#2B2140', '#1B2A38', '#3A2418'];
+  presetColors.forEach(c => {
+    const sw = document.createElement('div');
+    sw.className = 'swatch';
+    sw.style.background = c;
+    sw.addEventListener('click', () => setBg(c));
+    swatchesEl.appendChild(sw);
+  });
+  function setBg(hex){
+    board.style.backgroundColor = hex;
+    bgColor.value = hex;
+  }
+  bgColor.addEventListener('input', (e) => setBg(e.target.value));
+  setBg('#EDE3D0');
+
+  // ---------- Text color helper (contrast against board bg) ----------
+  function hexToRgb(hex){
+    const h = hex.replace('#','');
+    const n = parseInt(h.length===3 ? h.split('').map(c=>c+c).join('') : h, 16);
+    return { r:(n>>16)&255, g:(n>>8)&255, b:n&255 };
+  }
+  function luminance(hex){
+    const {r,g,b} = hexToRgb(hex);
+    const a = [r,g,b].map(v=>{
+      v/=255;
+      return v<=0.03928 ? v/12.92 : Math.pow((v+0.055)/1.055,2.4);
+    });
+    return 0.2126*a[0] + 0.7152*a[1] + 0.0722*a[2];
+  }
+  function textColorFor(hex){
+    return luminance(hex) > 0.45 ? '#211D17' : '#F3F0EA';
+  }
+
+  // ---------- Font choice ----------
+  const fontPresets = [
+    { id: 'fraunces', label: 'Fraunces', preview: 'Aa', family: "'Fraunces', serif", style: 'italic', weight: 400, ls: '0.01em' },
+    { id: 'playfair', label: 'Playfair', preview: 'Aa', family: "'Playfair Display', serif", style: 'italic', weight: 600, ls: '0em' },
+    { id: 'caveat', label: 'Caveat', preview: 'Aa', family: "'Caveat', cursive", style: 'normal', weight: 600, ls: '0.01em' },
+    { id: 'inter', label: 'Inter', preview: 'Aa', family: "'Inter', sans-serif", style: 'normal', weight: 500, ls: '0.005em' },
+    { id: 'mono', label: 'Space Mono', preview: 'Aa', family: "'Space Mono', monospace", style: 'normal', weight: 700, ls: '-0.01em' },
+  ];
+  const fontGrid = document.getElementById('font-grid');
+  fontPresets.forEach((f) => {
+    const card = document.createElement('div');
+    card.className = 'font-option' + (f.id === 'fraunces' ? ' active' : '');
+    card.dataset.fontId = f.id;
+    card.style.fontFamily = f.family;
+    card.style.fontStyle = f.style;
+    card.style.fontWeight = f.weight;
+    card.innerHTML = `${f.preview}<span class="fo-label">${f.label}</span>`;
+    card.addEventListener('click', () => setQuoteFont(f));
+    fontGrid.appendChild(card);
+  });
+  function setQuoteFont(f){
+    document.documentElement.style.setProperty('--quote-font-family', f.family);
+    document.documentElement.style.setProperty('--quote-font-style', f.style);
+    document.documentElement.style.setProperty('--quote-font-weight', f.weight);
+    document.documentElement.style.setProperty('--quote-letter-spacing', f.ls);
+    document.querySelectorAll('.font-option').forEach(el => {
+      el.classList.toggle('active', el.dataset.fontId === f.id);
+    });
+  }
+  setQuoteFont(fontPresets[0]);
+
+  // ---------- Quick packs ----------
+  const quotePacks = {
+    'Stoic': [
+      { text: 'You have power over your mind — not outside events. Realize this, and you will find strength.', author: 'Marcus Aurelius' },
+      { text: 'We suffer more in imagination than in reality.', author: 'Seneca' },
+      { text: 'No man is free who is not master of himself.', author: 'Epictetus' }
+    ],
+    'Focus': [
+      { text: 'Where focus goes, energy flows.', author: '' },
+      { text: 'Starve your distractions, feed your focus.', author: '' },
+      { text: 'One task at a time. That is the whole secret.', author: '' }
+    ],
+    'Grind': [
+      { text: 'Discipline is the bridge between goals and accomplishment.', author: 'Jim Rohn' },
+      { text: 'The pain of discipline weighs ounces; the pain of regret weighs tons.', author: '' },
+      { text: 'Small steps every day beat big leaps once in a while.', author: '' }
+    ],
+    'Warmth': [
+      { text: 'Be the reason someone believes in the goodness of people.', author: '' },
+      { text: 'What you do with kindness always comes back around.', author: '' },
+      { text: 'Home is wherever the people who love you are.', author: '' }
+    ]
+  };
+  Object.keys(quotePacks).forEach(name => {
+    const btn = document.createElement('button');
+    btn.className = 'pack-btn';
+    btn.textContent = '+ ' + name;
+    btn.addEventListener('click', () => {
+      quotePacks[name].forEach(q => quotes.push({ ...q }));
+      renderList();
+      ensureLoop();
+    });
+    packRow.appendChild(btn);
+  });
+
+  // ---------- Export / Import ----------
+  exportBtn.addEventListener('click', () => {
+    const blob = new Blob([JSON.stringify(quotes, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'quotes.json';
+    a.click();
+    URL.revokeObjectURL(url);
+  });
+  importBtn.addEventListener('click', () => importFile.click());
+  importFile.addEventListener('change', (e) => {
+    const file = e.target.files[0];
+    if(!file) return;
+    const reader = new FileReader();
+    reader.onload = () => {
+      try {
+        const data = JSON.parse(reader.result);
+        if(!Array.isArray(data)) throw new Error('Not an array');
+        data.forEach(item => {
+          if(typeof item === 'string'){
+            quotes.push({ text: item, author: '' });
+          } else if(item && typeof item.text === 'string'){
+            quotes.push({ text: item.text, author: item.author || '' });
+          }
+        });
+        renderList();
+        ensureLoop();
+      } catch(err){
+        alert('Could not read that file — expected a JSON list of quotes.');
+      }
+      importFile.value = '';
+    };
+    reader.readAsText(file);
+  });
+
+  // ---------- Screensaver mode ----------
+  let wakeLock = null;
+  async function requestWakeLock(){
+    try {
+      if('wakeLock' in navigator){
+        wakeLock = await navigator.wakeLock.request('screen');
+      }
+    } catch(err){ /* wake lock not available — fail silently */ }
+  }
+  function releaseWakeLock(){
+    if(wakeLock){ wakeLock.release().catch(()=>{}); wakeLock = null; }
+  }
+
+  let hideHintTimer = null;
+  function showExitHint(){
+    exitHint.classList.add('show');
+    clearTimeout(hideHintTimer);
+    hideHintTimer = setTimeout(() => exitHint.classList.remove('show'), 3500);
+  }
+
+  let enteredAt = 0;
+  function enterScreensaver(){
+    enteredAt = Date.now();
+    document.body.classList.add('screensaver-active');
+    panel.classList.remove('open');
+    menuToggle.classList.remove('open');
+    if(document.documentElement.requestFullscreen){
+      document.documentElement.requestFullscreen().catch(()=>{});
+    }
+    requestWakeLock();
+    showExitHint();
+  }
+  function exitScreensaver(){
+    document.body.classList.remove('screensaver-active');
+    if(document.fullscreenElement && document.exitFullscreen){
+      document.exitFullscreen().catch(()=>{});
+    }
+    releaseWakeLock();
+    exitHint.classList.remove('show');
+  }
+  screensaverBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    enterScreensaver();
+  });
+  ['mousemove', 'touchstart', 'click', 'keydown'].forEach(evt => {
+    document.addEventListener(evt, () => {
+      if(document.body.classList.contains('screensaver-active') && Date.now() - enteredAt > 500){
+        exitScreensaver();
+      }
+    }, { passive: true });
+  });
+  document.addEventListener('fullscreenchange', () => {
+    if(!document.fullscreenElement){
+      document.body.classList.remove('screensaver-active');
+      releaseWakeLock();
+    }
+  });
+  document.addEventListener('visibilitychange', () => {
+    if(document.visibilityState === 'visible' && document.body.classList.contains('screensaver-active')){
+      requestWakeLock();
+    }
+  });
+
+  // ---------- PWA: service worker ----------
+  if('serviceWorker' in navigator){
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('sw.js').catch(() => {});
+    });
+  }
+
+  // ---------- Music player ----------
+  // "Suggested tracks" are just named slots. You paste a YouTube link once
+  // per track (your choice of which official/legit upload to use) — after
+  // that, clicking the name plays it right here via YouTube's own embedded
+  // player. Nothing is downloaded, hosted, or reproduced by this app; the
+  // audio streams directly from YouTube. The separate "Playlist" section
+  // below is for your own local audio files.
+  const presetTrackNames = [
+    'Time Flows Ever Onward — Frieren',
+    'Her — The American Dawn',
+    'Hokage Funeral Theme',
+    'Obito Theme',
+    'Gaara Theme',
+    'Samidare — Eliott Tordo',
+    'Solace',
+    'Floating in Reverie'
+  ];
+  const PRESET_LINKS_KEY = 'quoteboard_preset_links_v1';
+  let presetLinks = {}; // name -> YouTube video id
+  try {
+    const saved = localStorage.getItem(PRESET_LINKS_KEY);
+    if(saved) presetLinks = JSON.parse(saved);
+  } catch(e){ /* storage unavailable in this context — links just won't persist */ }
+  function savePresetLinks(){
+    try { localStorage.setItem(PRESET_LINKS_KEY, JSON.stringify(presetLinks)); } catch(e){ /* ignore */ }
+  }
+
+  let tracks = []; // { id, name, url } — user-uploaded files only
+  let trackIdCounter = 0;
+  let currentTrackIndex = -1;
+  let isPlaying = false;
+  let currentSource = null; // { type: 'file', index } | { type: 'youtube', name }
+
+  function extractYouTubeId(url){
+    try {
+      const u = new URL(url.trim());
+      if(u.hostname.includes('youtu.be')) return u.pathname.slice(1) || null;
+      if(u.searchParams.get('v')) return u.searchParams.get('v');
+      const m = u.pathname.match(/\/(?:embed|shorts|live)\/([^/?]+)/);
+      if(m) return m[1];
+    } catch(e){ /* not a valid URL */ }
+    return null;
+  }
+
+  // ---- YouTube IFrame API (lazy-loaded on first use) ----
+  let ytPlayer = null;
+  let ytApiLoading = false;
+  let ytReadyQueue = [];
+  let ytFailed = (location.protocol === 'file:');
+  function ensureYouTubeReady(callback){
+    if(ytFailed){
+      nowPlayingEl.textContent = location.protocol === 'file:'
+        ? "YouTube playback needs a real web address — host this file (GitHub Pages/Netlify) or run a local server, not file://."
+        : "Can't load YouTube player here — open the downloaded file in a real browser tab.";
+      return;
+    }
+    if(ytPlayer){ callback(); return; }
+    ytReadyQueue.push(callback);
+    if(ytApiLoading) return;
+    ytApiLoading = true;
+    const failTimer = setTimeout(() => {
+      if(!ytPlayer){
+        ytFailed = true;
+        nowPlayingEl.textContent = "Can't load YouTube player here — open the downloaded file in a real browser tab.";
+      }
+    }, 6000);
+    window.onYouTubeIframeAPIReady = function(){
+      clearTimeout(failTimer);
+      ytPlayer = new YT.Player('yt-player', {
+        height: '0', width: '0',
+        playerVars: { autoplay: 0, controls: 0 },
+        events: {
+          onReady: () => { ytReadyQueue.forEach(cb => cb()); ytReadyQueue = []; },
+          onStateChange: onYtStateChange
+        }
+      });
+    };
+    if(window.YT && window.YT.Player){
+      window.onYouTubeIframeAPIReady();
+    } else {
+      const tag = document.createElement('script');
+      tag.src = 'https://www.youtube.com/iframe_api';
+      tag.onerror = () => {
+        clearTimeout(failTimer);
+        ytFailed = true;
+        nowPlayingEl.textContent = "Can't load YouTube player here — open the downloaded file in a real browser tab.";
+      };
+      document.head.appendChild(tag);
+    }
+  }
+  function onYtStateChange(e){
+    if(e.data === YT.PlayerState.ENDED && currentSource && currentSource.type === 'youtube'){
+      ytPlayer.seekTo(0);
+      ytPlayer.playVideo(); // loop the ambient track
+    }
+    if(e.data === YT.PlayerState.PLAYING){ isPlaying = true; updatePlayButton(); }
+    if(e.data === YT.PlayerState.PAUSED){ isPlaying = false; updatePlayButton(); }
+  }
+
+  function stopAllPlayback(){
+    audioPlayer.pause();
+    if(ytPlayer && ytPlayer.pauseVideo) ytPlayer.pauseVideo();
+  }
+
+  function promptForLink(name){
+    const url = window.prompt(`Paste a YouTube link for "${name}":`, '');
+    if(!url) return;
+    const id = extractYouTubeId(url);
+    if(!id){ alert("Couldn't find a video ID in that link — paste a full YouTube URL."); return; }
+    presetLinks[name] = id;
+    savePresetLinks();
+    renderPresetList();
+  }
+
+  function playPreset(name){
+    const id = presetLinks[name];
+    if(!id) return;
+    stopAllPlayback();
+    currentSource = { type: 'youtube', name };
+    nowPlayingEl.textContent = name;
+    renderPresetList();
+    renderTrackList();
+    ensureYouTubeReady(() => {
+      ytPlayer.loadVideoById(id);
+      isPlaying = true;
+      updatePlayButton();
+    });
+  }
+
+  function renderPresetList(){
+    presetTrackListEl.innerHTML = '';
+    presetTrackNames.forEach((name) => {
+      const linked = !!presetLinks[name];
+      const li = document.createElement('li');
+      if(linked && currentSource && currentSource.type === 'youtube' && currentSource.name === name){
+        li.classList.add('playing');
+      }
+      const nameSpan = document.createElement('span');
+      nameSpan.className = 't-name';
+      nameSpan.textContent = name;
+      if(linked){
+        nameSpan.style.cursor = 'pointer';
+        nameSpan.addEventListener('click', () => playPreset(name));
+      }
+
+      const links = document.createElement('span');
+      links.className = 't-links';
+      const actionBtn = document.createElement('button');
+      actionBtn.className = 't-link';
+      actionBtn.textContent = linked ? 'Relink' : 'Paste YouTube link';
+      actionBtn.addEventListener('click', () => promptForLink(name));
+      links.appendChild(actionBtn);
+
+      li.appendChild(nameSpan);
+      li.appendChild(links);
+      presetTrackListEl.appendChild(li);
+    });
+  }
+
+  function renderTrackList(){
+    trackCountEl.textContent = tracks.length;
+    trackListEl.innerHTML = '';
+    if(tracks.length === 0){
+      const empty = document.createElement('div');
+      empty.className = 'empty-list';
+      empty.textContent = 'No tracks yet';
+      trackListEl.appendChild(empty);
+      return;
+    }
+    tracks.forEach((t, i) => {
+      const li = document.createElement('li');
+      if(currentSource && currentSource.type === 'file' && currentSource.index === i) li.classList.add('playing');
+      const nameSpan = document.createElement('span');
+      nameSpan.className = 't-name';
+      nameSpan.textContent = t.name;
+      nameSpan.addEventListener('click', () => playTrack(i));
+      nameSpan.style.cursor = 'pointer';
+      const del = document.createElement('button');
+      del.className = 'q-del';
+      del.textContent = '×';
+      del.addEventListener('click', () => removeTrack(i));
+      li.appendChild(nameSpan);
+      li.appendChild(del);
+      trackListEl.appendChild(li);
+    });
+  }
+
+  function removeTrack(i){
+    const t = tracks[i];
+    if(currentSource && currentSource.type === 'file' && currentSource.index === i){
+      audioPlayer.pause();
+      audioPlayer.src = '';
+      currentSource = null;
+      isPlaying = false;
+      updatePlayButton();
+      nowPlayingEl.textContent = 'Nothing playing';
+    }
+    URL.revokeObjectURL(t.url);
+    tracks.splice(i, 1);
+    renderTrackList();
+  }
+
+  function playTrack(i){
+    if(i < 0 || i >= tracks.length) return;
+    stopAllPlayback();
+    currentSource = { type: 'file', index: i };
+    audioPlayer.src = tracks[i].url;
+    audioPlayer.play().then(() => {
+      isPlaying = true;
+      updatePlayButton();
+    }).catch(() => { isPlaying = false; updatePlayButton(); });
+    nowPlayingEl.textContent = tracks[i].name;
+    renderPresetList();
+    renderTrackList();
+  }
+
+  function updatePlayButton(){
+    musicPlayBtn.textContent = isPlaying ? '❚❚' : '▶';
+  }
+
+  musicPlayBtn.addEventListener('click', () => {
+    if(!currentSource){
+      if(tracks.length > 0) playTrack(0);
+      return;
+    }
+    if(currentSource.type === 'youtube'){
+      if(!ytPlayer) return;
+      if(isPlaying){ ytPlayer.pauseVideo(); } else { ytPlayer.playVideo(); }
+      // isPlaying/updatePlayButton handled by onYtStateChange
+    } else {
+      if(isPlaying){
+        audioPlayer.pause();
+        isPlaying = false;
+      } else {
+        audioPlayer.play().catch(() => {});
+        isPlaying = true;
+      }
+      updatePlayButton();
+    }
+  });
+
+  audioPlayer.addEventListener('ended', () => {
+    if(!currentSource || currentSource.type !== 'file' || tracks.length === 0) return;
+    const next = (currentSource.index + 1) % tracks.length;
+    playTrack(next);
+  });
+
+  musicVolume.addEventListener('input', (e) => {
+    const v = parseFloat(e.target.value);
+    audioPlayer.volume = v;
+    if(ytPlayer && ytPlayer.setVolume) ytPlayer.setVolume(v * 100);
+  });
+  audioPlayer.volume = parseFloat(musicVolume.value);
+
+  musicUploadBtn.addEventListener('click', () => musicUploadFile.click());
+  musicUploadFile.addEventListener('change', (e) => {
+    Array.from(e.target.files).forEach(file => {
+      tracks.push({
+        id: ++trackIdCounter,
+        name: file.name.replace(/\.[^/.]+$/, ''),
+        url: URL.createObjectURL(file)
+      });
+    });
+    renderTrackList();
+    musicUploadFile.value = '';
+  });
+
+  renderPresetList();
+  renderTrackList();
+  if(location.protocol === 'file:'){
+    nowPlayingEl.textContent = 'Open via a real web address for YouTube playback (see hint below)';
+  }
+
+  // ---------- Quotes management ----------
+  function renderList(){
+    countEl.textContent = quotes.length;
+    quoteListEl.innerHTML = '';
+    if(quotes.length === 0){
+      const li = document.createElement('div');
+      li.className = 'empty-list';
+      li.textContent = 'Nothing yet';
+      quoteListEl.appendChild(li);
+      return;
+    }
+    quotes.forEach((q, i) => {
+      const li = document.createElement('li');
+      const span = document.createElement('span');
+      span.className = 'q-text';
+      span.textContent = q.author ? `${q.text} — ${q.author}` : q.text;
+      const del = document.createElement('button');
+      del.className = 'q-del';
+      del.textContent = '×';
+      del.addEventListener('click', () => {
+        quotes.splice(i,1);
+        renderList();
+      });
+      li.appendChild(span);
+      li.appendChild(del);
+      quoteListEl.appendChild(li);
+    });
+  }
+
+  function addQuote(){
+    const text = quoteInput.value.trim();
+    if(!text) return;
+    const author = authorInput.value.trim();
+    quotes.push({ text, author });
+    quoteInput.value = '';
+    authorInput.value = '';
+    renderList();
+    ensureLoop();
+  }
+  addBtn.addEventListener('click', addQuote);
+  quoteInput.addEventListener('keydown', (e) => {
+    if(e.key === 'Enter' && (e.ctrlKey || e.metaKey)){
+      e.preventDefault();
+      addQuote();
+    }
+  });
+  authorInput.addEventListener('keydown', (e) => {
+    if(e.key === 'Enter'){
+      e.preventDefault();
+      addQuote();
+    }
+  });
+
+  // ---------- Order ----------
+  document.querySelectorAll('.seg button').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.seg button').forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+      order = btn.dataset.order;
+    });
+  });
+
+  // ---------- Interval ----------
+  intervalSlider.addEventListener('input', (e) => {
+    intervalSec = parseFloat(e.target.value);
+    intervalValue.textContent = (intervalSec % 1 === 0 ? intervalSec : intervalSec.toFixed(1)) + 's';
+    restartLoop();
+  });
+
+  // ---------- Max on screen ----------
+  function updateMaxDisplay(){ maxCountEl.textContent = maxOnScreen; }
+  decMax.addEventListener('click', () => { if(maxOnScreen>1){ maxOnScreen--; updateMaxDisplay(); } });
+  incMax.addEventListener('click', () => { if(maxOnScreen<5){ maxOnScreen++; updateMaxDisplay(); } });
+
+  // ---------- Picking next quote ----------
+  function pickNext(){
+    if(quotes.length === 0) return null;
+    if(quotes.length === 1) return quotes[0];
+    if(order === 'sequential'){
+      const q = quotes[seqIndex % quotes.length];
+      seqIndex++;
+      return q;
+    } else {
+      let idx;
+      do { idx = Math.floor(Math.random() * quotes.length); } while(idx === lastRandomIndex);
+      lastRandomIndex = idx;
+      return quotes[idx];
+    }
+  }
+
+  // ---------- Reading-time based hold duration ----------
+  function computeHold(text){
+    const words = text.trim().split(/\s+/).filter(Boolean).length;
+    const readMs = words * 340;       // ~175 words/min reading pace
+    return Math.min(13000, Math.max(3200, 2200 + readMs));
+  }
+
+  // ---------- Overlap avoidance ----------
+  // Tracks pixel bounding boxes of quotes currently on the board.
+  const activeRects = []; // { id, x1,y1,x2,y2 }
+  let rectIdCounter = 0;
+  const OVERLAP_MARGIN = 22; // px breathing room between quotes
+
+  function rectsOverlap(a, b){
+    return !(a.x2 + OVERLAP_MARGIN < b.x1 || a.x1 - OVERLAP_MARGIN > b.x2 ||
+             a.y2 + OVERLAP_MARGIN < b.y1 || a.y1 - OVERLAP_MARGIN > b.y2);
+  }
+
+  function findFreeSpot(width, height, boardW, boardH){
+    const marginX = Math.min(boardW * 0.16, boardW / 2 - width / 2 - 4);
+    const marginY = Math.min(boardH * 0.14, boardH / 2 - height / 2 - 4);
+    const minCx = Math.max(width / 2 + 8, marginX + width / 2);
+    const maxCx = Math.min(boardW - width / 2 - 8, boardW - marginX - width / 2);
+    const minCy = Math.max(height / 2 + 8, marginY + height / 2);
+    const maxCy = Math.min(boardH - height / 2 - 8, boardH - marginY - height / 2);
+
+    const attempts = 24;
+    for(let i = 0; i < attempts; i++){
+      const cx = minCx + Math.random() * Math.max(1, maxCx - minCx);
+      const cy = minCy + Math.random() * Math.max(1, maxCy - minCy);
+      const candidate = { x1: cx - width/2, y1: cy - height/2, x2: cx + width/2, y2: cy + height/2 };
+      const collides = activeRects.some(r => rectsOverlap(candidate, r));
+      if(!collides) return { cx, cy, rect: candidate };
+    }
+    return null; // board too crowded right now
+  }
+
+  // ---------- Spawning ----------
+  function spawnQuote(){
+    if(quotes.length === 0 || onScreenCount >= maxOnScreen) return;
+    const quote = pickNext();
+    if(!quote) return;
+    const text = quote.text;
+    const author = quote.author;
+
+    const el = document.createElement('div');
+    el.className = 'quote';
+    const body = document.createElement('span');
+    body.className = 'q-body';
+    body.textContent = text;
+    el.appendChild(body);
+    if(author){
+      const authorEl = document.createElement('span');
+      authorEl.className = 'q-author';
+      authorEl.textContent = `— ${author}`;
+      el.appendChild(authorEl);
+    }
+    el.style.visibility = 'hidden';
+    el.style.left = '0px';
+    el.style.top = '0px';
+
+    // Random-but-bounded size: shorter quotes lean larger, longer ones
+    // smaller, with a real (not diluted) random spread — bounded so it
+    // never gets absurdly big or unreadably small.
+    const wordCount = text.trim().split(/\s+/).filter(Boolean).length;
+    const lengthFactor = wordCount <= 5 ? 1.25 : wordCount <= 11 ? 1.0 : 0.8;
+    const jitter = 0.85 + Math.random() * 0.3; // wider, clearly visible spread
+    const scale = lengthFactor * jitter;
+    el.style.fontSize = `clamp(1.2rem, ${(1.7 * scale).toFixed(2)}rem, 2.6rem)`;
+    el.style.color = textColorFor(bgColor.value);
+
+    layer.appendChild(el);
+
+    // Measure real rendered size (after text wraps against max-width)
+    const w = el.offsetWidth;
+    const h = el.offsetHeight;
+    const boardRect = board.getBoundingClientRect();
+
+    const spot = findFreeSpot(w, h, boardRect.width, boardRect.height);
+    if(!spot){
+      // Board is too crowded right now — skip this tick, try again next one
+      el.remove();
+      return;
+    }
+
+    const id = ++rectIdCounter;
+    const rect = { id, ...spot.rect };
+    activeRects.push(rect);
+
+    onScreenCount++;
+    emptyState.style.opacity = '0';
+
+    el.style.left = spot.cx + 'px';
+    el.style.top = spot.cy + 'px';
+    el.style.visibility = 'visible';
+
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      el.classList.add('visible');
+    }));
+
+    const holdMs = computeHold(text);
+
+    setTimeout(() => {
+      el.classList.remove('visible');
+      el.classList.add('fading');
+      // Free up its space once it's mostly faded out visually (roughly
+      // halfway through the fade transition), not the instant fading
+      // starts — otherwise a new quote could claim the spot while the
+      // old one is still readable.
+      setTimeout(() => {
+        const idx = activeRects.findIndex(r => r.id === id);
+        if(idx !== -1) activeRects.splice(idx, 1);
+      }, 900);
+
+      el.addEventListener('transitionend', function onEnd(ev){
+        if(ev.propertyName !== 'opacity') return;
+        el.removeEventListener('transitionend', onEnd);
+        el.remove();
+        onScreenCount = Math.max(0, onScreenCount - 1);
+        if(quotes.length === 0 && layer.children.length === 0){
+          emptyState.style.opacity = '0.55';
+        }
+      });
+    }, holdMs);
+  }
+
+  function ensureLoop(){
+    if(spawnTimer) return;
+    spawnTimer = setInterval(() => {
+      spawnQuote();
+    }, intervalSec * 1000);
+    spawnQuote();
+  }
+  function restartLoop(){
+    if(spawnTimer){
+      clearInterval(spawnTimer);
+      spawnTimer = null;
+    }
+    if(quotes.length > 0) ensureLoop();
+  }
+
+  // Kick things off
+  renderList();
+  updateMaxDisplay();
+  intervalValue.textContent = intervalSec + 's';
+
+  // Seed a couple of example quotes so the board isn't empty on first look
+  quotes = [
+    { text: 'Discipline is the bridge between goals and accomplishment.', author: 'Jim Rohn' },
+    { text: 'Small steps every day beat big leaps once in a while.', author: '' },
+    { text: 'Do what you can, with what you have, where you are.', author: 'Theodore Roosevelt' }
+  ];
+  renderList();
+  ensureLoop();
+
+})();
+</script>
+</body>
+</html>

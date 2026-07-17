@@ -1,0 +1,15 @@
+{
+  "name": "Quote Board",
+  "short_name": "Quote Board",
+  "description": "A calm, fullscreen board where your favorite quotes drift in and fade out.",
+  "start_url": "./index.html",
+  "display": "fullscreen",
+  "orientation": "any",
+  "background_color": "#EDE3D0",
+  "theme_color": "#EDE3D0",
+  "icons": [
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
