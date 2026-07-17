@@ -1,4 +1,4 @@
-const CACHE_NAME = 'quote-board-v1';
+const CACHE_NAME = 'quote-board-v1.1';
 const ASSETS = [
   './index.html',
   './manifest.json',
