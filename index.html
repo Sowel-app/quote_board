@@ -484,6 +484,7 @@
 
   @media (max-width: 480px){
     #panel{ width: calc(100vw - 32px); right: 16px; }
+    .quote{ max-width: min(60vw, 260px); }
   }
 </style>
 </head>
@@ -861,7 +862,6 @@
   // audio streams directly from YouTube. The separate "Playlist" section
   // below is for your own local audio files.
   const presetTrackNames = [
-    'Add your music from YouTube',
     'Time Flows Ever Onward — Frieren',
     'Her — The American Dawn',
     'Hokage Funeral Theme',
@@ -1280,12 +1280,18 @@
 
     // Random-but-bounded size: shorter quotes lean larger, longer ones
     // smaller, with a real (not diluted) random spread — bounded so it
-    // never gets absurdly big or unreadably small.
+    // never gets absurdly big or unreadably small. Phones get a lower
+    // floor/ceiling so more quotes can fit on screen at once without
+    // overlapping, instead of one or two large ones hogging the space.
+    const isNarrowScreen = window.innerWidth <= 480;
     const wordCount = text.trim().split(/\s+/).filter(Boolean).length;
     const lengthFactor = wordCount <= 5 ? 1.25 : wordCount <= 11 ? 1.0 : 0.8;
     const jitter = 0.85 + Math.random() * 0.3; // wider, clearly visible spread
     const scale = lengthFactor * jitter;
-    el.style.fontSize = `clamp(1.2rem, ${(1.7 * scale).toFixed(2)}rem, 2.6rem)`;
+    const sizeMin = isNarrowScreen ? 0.85 : 1.2;
+    const sizeMax = isNarrowScreen ? 1.5 : 2.6;
+    const sizeMult = isNarrowScreen ? 1.0 : 1.7;
+    el.style.fontSize = `clamp(${sizeMin}rem, ${(sizeMult * scale).toFixed(2)}rem, ${sizeMax}rem)`;
     el.style.color = textColorFor(bgColor.value);
 
     layer.appendChild(el);
