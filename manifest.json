@@ -1,7 +1,7 @@
 {
-  "name": "Quote Board",
+  "name": "Quote Board by Sowel",
   "short_name": "Quote Board",
-  "description": "A calm, fullscreen board where your favorite quotes drift in and fade out.",
+  "description": "A calm, fullscreen board where your favorite quotes drift in and fade out. Built by Sowel.",
   "start_url": "./index.html",
   "display": "fullscreen",
   "orientation": "any",
