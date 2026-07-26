@@ -299,7 +299,6 @@
   // audio streams directly from YouTube. The separate "Playlist" section
   // below is for your own local audio files.
   const presetTrackNames = [
-    'Your music from YouTube',
     'Time Flows Ever Onward — Frieren',
     'Her — The American Dawn',
     'Hokage Funeral Theme',
