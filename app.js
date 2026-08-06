@@ -300,14 +300,11 @@
   // below is for your own local audio files.
   const presetTrackNames = [
     'Your music from YouTube',
-    'Time Flows Ever Onward — Frieren',
     'Her — The American Dawn',
-    'Hokage Funeral Theme',
-    'Obito Theme',
-    'Gaara Theme',
     'Samidare — Eliott Tordo',
     'Solace',
-    'Floating in Reverie'
+    'Floating in Reverie',
+    'Time Flows Ever Onward — Frieren'
   ];
   const PRESET_LINKS_KEY = 'quoteboard_preset_links_v1';
   let presetLinks = {}; // name -> YouTube video id
