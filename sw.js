@@ -1,4 +1,4 @@
-const CACHE_NAME = 'quote-board-v5';
+const CACHE_NAME = 'quote-board-v6';
 const ASSETS = [
   './index.html',
   './style.css',
