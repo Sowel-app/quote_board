@@ -299,11 +299,9 @@
   // audio streams directly from YouTube. The separate "Playlist" section
   // below is for your own local audio files.
   const presetTrackNames = [
+    'Add your music from YouTube',
     'Time Flows Ever Onward — Frieren',
     'Her — The American Dawn',
-    'Hokage Funeral Theme',
-    'Obito Theme',
-    'Gaara Theme',
     'Samidare — Eliott Tordo',
     'Solace',
     'Floating in Reverie'
